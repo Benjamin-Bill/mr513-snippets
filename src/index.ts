@@ -23,8 +23,8 @@ app.set('view engine', 'ejs');
 
 app.use('/', snippets);
 
+
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.log(`ERREUR : ${err.message}`);
     res.render('error', { err });
 });
 
