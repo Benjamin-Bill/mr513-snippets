@@ -1,0 +1,13 @@
+<%- include('../partials/header.ejs', {title: title}) %>
+
+<div class="content">
+<% snippets.forEach(snippet => { %>
+    <div class="card">
+        <h2><%= snippet.title %></h2>
+        <pre><%= snippet.code %></pre>
+        <p><%= snippet.description %></p>
+        <p>Posté le <%= snippet.creationDate.toLocaleString() %></p>
+    </div>
+<% }) %>
+</div>
+<%- include('../partials/footer.ejs') %>

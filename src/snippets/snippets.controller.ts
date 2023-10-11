@@ -3,8 +3,8 @@ import {prisma} from "../services/prima";
 
 export class SnippetsController {
     static async list(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const snippets = prisma.snippet.findMany().then((snippets) => console.log(snippets));
-        res.render('snippets/snippets_list', {snippets: snippets, title: 'Liste des snippets', async: true});
+        const snippets = await prisma.snippet.findMany().then((snippets) => {return snippets});
+        res.render('snippets/snippets_list', {snippets, title: 'Liste des snippets', section: 'Snippets' });
     }
 }
 
