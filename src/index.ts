@@ -1,7 +1,8 @@
 import express, {NextFunction, Response, Request} from 'express';
 import 'dotenv/config'
 import session from 'express-session';
-import snippets from './snippets/snippets.routes';
+import snippetsRoutes from './snippets/snippets.routes';
+import languagesRoutes from "./languages/languages.routes";
 
 const app = express();
 const port = process.env.PORT;
@@ -21,7 +22,8 @@ declare module 'express-session' {
 
 app.set('view engine', 'ejs');
 
-app.use('/', snippets);
+app.use('/', snippetsRoutes);
+app.use('/languages', languagesRoutes);
 
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

@@ -3,11 +3,13 @@
 <div class="content">
 <% snippets.forEach(snippet => { %>
     <div class="card">
-        <h2><%= snippet.title %></h2>
-        <pre><%= snippet.code %></pre>
+        <h2><i class="<%= snippet.Language.logo %> colored" ></i> <%= snippet.title %></h2>
+        <pre><code class="<%= snippet.Language.htmlClass %>"><%= snippet.code %></code></pre>
         <p><%= snippet.description %></p>
         <p>Posté le <%= snippet.creationDate.toLocaleString() %></p>
     </div>
 <% }) %>
 </div>
+
+<script src="js/prism.js"></script>
 <%- include('../partials/footer.ejs') %>
