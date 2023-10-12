@@ -5,8 +5,8 @@
     <div class="card">
         <h2><i class="<%= snippet.Language.logo %> colored" ></i> <%= snippet.title %></h2>
         <pre><code class="<%= snippet.Language.htmlClass %>"><%= snippet.code %></code></pre>
-        <p><%= snippet.description %></p>
-        <p>Posté le <%= snippet.creationDate.toLocaleString() %></p>
+        <p class="comment"><%= snippet.description %></p>
+        <p class="date">Posté le <%= snippet.creationDate.toLocaleString() %></p>
     </div>
 <% }) %>
 </div>

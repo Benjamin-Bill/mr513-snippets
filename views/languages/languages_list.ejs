@@ -3,6 +3,7 @@
 <div class="content">
     <% languages.forEach(language => { %>
         <div class="card">
+            <a href="/?lang=<%= language.id%>">
             <h4>
                 <i class="<%= language.logo %> colored" ></i>
                 <%= language.name %>
@@ -12,6 +13,7 @@
             <%= language.snippets.length %> snippets
             <% } %>
             </h4>
+            </a>
         </div>
     <% }) %>
 </div>
