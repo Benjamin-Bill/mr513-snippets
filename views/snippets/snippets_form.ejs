@@ -1,0 +1,29 @@
+<%- include('../partials/header.ejs', {title: title}) %>
+
+<div class="content">
+    <form method="post" action="/new">
+        <label>
+            Title:
+            <input type="text" name="title" placeholder="Title" required>
+        </label>
+        <label>
+            Language:
+            <select name="languages">
+                <% for(const language of languages) { %>
+                    <option value="<%= language.id %>"><%= language.name %></option>
+                <% } %>
+            </select>
+        </label>
+        <label>
+            Code:
+            <textarea name="code" placeholder="Code" required></textarea>
+        </label>
+        <label>
+            Description:
+            <textarea name="description" placeholder="Description" ></textarea>
+        </label>
+        <input type="submit" value="Create">
+    </form>
+</div>
+
+<%- include('../partials/footer.ejs') %>
