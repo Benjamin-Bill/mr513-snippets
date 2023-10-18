@@ -6,8 +6,7 @@
         <h2><i class="<%= snippet.Language.logo %> colored" ></i> <%= snippet.title %></h2>
         <pre><code class="<%= snippet.Language.htmlClass %>"><%= snippet.code %></code></pre>
         <p class="comment"><%= snippet.description %></p>
-        <p class="date">Posté le <%= snippet.creationDate.toLocaleString() %></p>
-        <p class="">Auteur : <%= snippet.user %></p>
+        <p class="date">Posté par <%= snippet.User.name %> le <%= snippet.creationDate.toLocaleString() %></p>
     </div>
 <% }) %>
 </div>

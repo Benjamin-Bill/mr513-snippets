@@ -18,7 +18,7 @@
         <% if (user === undefined) {%>
         <a href="/auth" class="button header">Connexion</a>
         <% } else { %>
-        <p><%= user%></p>
+        <p><%= user.name %></p>
         <a href="/auth/logout" class="button header">Déconnexion</a>
         <% } %>
     </div>

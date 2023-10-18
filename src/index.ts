@@ -4,9 +4,6 @@ import session from 'express-session';
 import snippetsRoutes from './snippets/snippets.routes';
 import languagesRoutes from "./languages/languages.routes";
 import authRoutes from "./auth/auth.routes";
-import bodyParser from "body-parser";
-import sessionData from "./types/session";
-import {User} from "@prisma/client";
 import {sessionUser} from "./auth/auth.middleware";
 
 const app = express();

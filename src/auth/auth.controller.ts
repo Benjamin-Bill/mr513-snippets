@@ -1,4 +1,4 @@
-import {NextFunction, Request, Response} from "express";
+import {Request, Response} from "express";
 import {prisma} from "../services/prima";
 import bcrypt from "bcrypt";
 
@@ -7,13 +7,13 @@ export class AuthController {
     res.render('auth/login_form', {title: 'Connexion', section: 'Connexion' });
   }
 
-  static async login(req: Request, res: Response, next: NextFunction): Promise<void> {
+  static async login(req: Request, res: Response): Promise<void> {
     const name: string = req.body.name;
     const user = await prisma.user.findFirst({
       where: {
         name: name
       }
-    }).then((user) => {return user}).catch((err) => {return undefined});
+    }).then((user) => {return user}).catch(() => {return undefined});
 
     if (user === undefined || user === null) {
       throw new Error('Utilisateur inconnu');
@@ -26,14 +26,14 @@ export class AuthController {
         throw new Error('Mot de passe incorrect');
       } else {
         req.session.regenerate(() => {
-          req.session.user = user.name;
+          req.session.user = user;
           res.redirect('/');
         })
       }
     }
   }
 
-  static async logout(req: Request, res: Response, next: NextFunction): Promise<void> {
+  static logout(req: Request, res: Response): void {
     req.session.destroy(() => {
       res.redirect('/');
     })
