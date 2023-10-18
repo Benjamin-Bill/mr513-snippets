@@ -3,6 +3,11 @@ import 'dotenv/config'
 import session from 'express-session';
 import snippetsRoutes from './snippets/snippets.routes';
 import languagesRoutes from "./languages/languages.routes";
+import authRoutes from "./auth/auth.routes";
+import bodyParser from "body-parser";
+import sessionData from "./types/session";
+import {User} from "@prisma/client";
+import {sessionUser} from "./auth/auth.middleware";
 
 const app = express();
 const port = process.env.PORT;
@@ -15,15 +20,14 @@ app.use(session({
     resave: false
 }));
 
-declare module 'express-session' {
-    interface SessionData {
-    }
-}
-
 app.set('view engine', 'ejs');
 
-app.use('/', snippetsRoutes);
-app.use('/languages', languagesRoutes);
+app.use(express.urlencoded({ extended: false }));
+
+
+app.use('/',sessionUser, snippetsRoutes);
+app.use('/languages', sessionUser, languagesRoutes);
+app.use('/auth', sessionUser, authRoutes);
 
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

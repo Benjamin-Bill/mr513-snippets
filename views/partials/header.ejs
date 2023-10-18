@@ -15,5 +15,11 @@
     <div class="">
         <a href="/" class="button header">Accueil</a>
         <a href="/languages" class="button header">Langages</a>
+        <% if (user === undefined) {%>
+        <a href="/auth" class="button header">Connexion</a>
+        <% } else { %>
+        <p><%= user%></p>
+        <a href="/auth/logout" class="button header">Déconnexion</a>
+        <% } %>
     </div>
 </div>
