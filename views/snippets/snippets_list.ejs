@@ -7,6 +7,10 @@
         <pre><code class="<%= snippet.Language.htmlClass %>"><%= snippet.code %></code></pre>
         <p class="comment"><%= snippet.description %></p>
         <p class="date">Posté par <%= snippet.User.name %> le <%= snippet.creationDate.toLocaleString() %></p>
+        <% if (user !== undefined && user.name === snippet.User.name) {%>
+        <a class="button edit" href="/edit/<%= snippet.id%>">Edit</a>
+        <a class="button delete" href="/delete/<%= snippet.id%>">Delete</a>
+        <% } %>
     </div>
 <% }) %>
 

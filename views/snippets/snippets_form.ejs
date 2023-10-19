@@ -1,26 +1,50 @@
 <%- include('../partials/header.ejs', {title: title}) %>
 
 <div class="content">
-    <form method="post" action="/new">
+    <% if (snippet !== undefined) { %>
+    <form method="post" action="/edit/<%= snippet.id %>">
+        <%} else {%>
+        <form method="post" action="/new">
+            <% } %>
         <label>
             Title:
-            <input type="text" name="title" placeholder="Title" required>
+            <% if (snippet !== undefined) {%>
+                <input type="text" name="title" value="<%= snippet.title %>">
+            <% } else {%>
+                <input type="text" name="title" placeholder="Title" required>
+            <% } %>
         </label>
         <label>
             Language:
             <select name="languages">
                 <% for(const language of languages) { %>
-                    <option value="<%= language.id %>"><%= language.name %></option>
+                    <% if (snippet !== undefined) {%>
+                        <% if (language.id === snippet.languageId) {%>
+                            <option value="<%= language.id %>" selected="selected"><%= language.name %></option>
+                        <% } else {%>
+                            <option value="<%= language.id %>"><%= language.name %></option>
+                        <% } %>
+                    <% } else {%>
+                        <option value="<%= language.id %>"><%= language.name %></option>
+                    <% } %>
                 <% } %>
             </select>
         </label>
         <label>
             Code:
-            <textarea name="code" placeholder="Code" required></textarea>
+            <% if (snippet !== undefined) {%>
+                <textarea name="code" placeholder="Code" required><%= snippet.code %></textarea>
+            <% } else {%>
+             <textarea name="code" placeholder="Code" required></textarea>
+            <% } %>
         </label>
         <label>
             Description:
+            <% if (snippet !== undefined) {%>
+                <textarea name="description" placeholder="Description" ><%= snippet.description %></textarea>
+            <% } else {%>
             <textarea name="description" placeholder="Description" ></textarea>
+            <% } %>
         </label>
         <input type="submit" value="Create">
     </form>

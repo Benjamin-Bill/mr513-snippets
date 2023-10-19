@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import {prisma} from "../services/prima";
 
 export function sessionUser(req: Request, res: Response, next: NextFunction): void {
   res.locals.user = req.session.user;
@@ -10,5 +11,17 @@ export function isConnected(req: Request, res: Response, next: NextFunction): vo
     next();
   } else {
     res.redirect('/auth');
+  }
+}
+
+export async function isAuthoreConnected(req: Request, res: Response, next: NextFunction): Promise<void> {
+  const snippetId = parseInt(req.params.id);
+  const snippet = await prisma.snippet.findUnique({where: {id: snippetId}}).then((snippet) => {
+    return snippet
+  });
+  if (snippet !== null && snippet.userId === req.session.user.id) {
+    next();
+  } else {
+    res.redirect('/');
   }
 }
