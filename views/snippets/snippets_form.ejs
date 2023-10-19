@@ -2,7 +2,7 @@
 
 <div class="content">
     <% if (snippet !== undefined) { %>
-    <form method="post" action="/edit<%= snippet.id %>">
+    <form method="post" action="/edit/<%= snippet.id %>">
         <%} else {%>
         <form method="post" action="/new">
             <% } %>
@@ -46,7 +46,7 @@
             <textarea name="description" placeholder="Description" ></textarea>
             <% } %>
         </label>
-        <input type="submit" value="Create">
+        <input type="submit" value="<%= snippet !== undefined ? 'Save' : 'Create' %>">
     </form>
 </div>
 

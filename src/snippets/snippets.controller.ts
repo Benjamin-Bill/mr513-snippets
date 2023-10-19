@@ -19,17 +19,15 @@ export class SnippetsController {
       }).then((snippets) => {
         return snippets
       });
-      const user = req.session.user;
-      res.render('snippets/snippets_list', {snippets, title: 'Liste des snippets', section: 'Snippets', user});
+      res.render('snippets/snippets_list', {snippets, title: 'Liste des snippets', section: 'Snippets',  authUser: req.session.user});
     } else {
       throw new Error(result.array()[0].msg);
     }
   }
 
   static async newForm(req: Request, res: Response): Promise<void> {
-    const user = req.session.user;
     const languages = await prisma.language.findMany().catch((error) => {throw new Error(error)});
-    res.render('snippets/snippets_form', {languages, title: 'Nouveau snippet', section: 'Snippets', user, snippet: undefined});
+    res.render('snippets/snippets_form', {languages, title: 'Nouveau snippet', section: 'Snippets', authUser: req.session.user, snippet: undefined});
   }
 
   static async newSnippet(req: Request, res: Response): Promise<void> {
@@ -64,10 +62,9 @@ export class SnippetsController {
   }
 
   static async editForm(req: Request, res: Response): Promise<void> {
-    const user = req.session.user;
     const languages = await prisma.language.findMany();
     const snippet = await prisma.snippet.findUnique({where: {id: parseInt(req.params.id)}});
-    res.render('snippets/snippets_form', {title: 'Modifier un snippet', section: 'Snippets', snippet, languages, user});
+    res.render('snippets/snippets_form', {title: 'Modifier un snippet', section: 'Snippets', snippet, languages, authUser: req.session.user});
   }
 
   static async editSnippet(req: Request, res: Response): Promise<void> {

@@ -98,6 +98,10 @@ textarea {
     min-height: 10em;
 }
 
+a {
+    text-decoration: none;
+}
+
 a.edit {
     color: white;
     background-color: #0A0;
