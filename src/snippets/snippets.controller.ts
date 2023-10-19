@@ -28,8 +28,8 @@ export class SnippetsController {
 
   static async newForm(req: Request, res: Response): Promise<void> {
     const user = req.session.user;
-    const languages = await prisma.language.findMany();
-    res.render('snippets/snippets_form', {languages, title: 'Nouveau snippet', section: 'Snippets', user});
+    const languages = await prisma.language.findMany().catch((error) => {throw new Error(error)});
+    res.render('snippets/snippets_form', {languages, title: 'Nouveau snippet', section: 'Snippets', user, snippet: undefined});
   }
 
   static async newSnippet(req: Request, res: Response): Promise<void> {
@@ -67,7 +67,6 @@ export class SnippetsController {
     const user = req.session.user;
     const languages = await prisma.language.findMany();
     const snippet = await prisma.snippet.findUnique({where: {id: parseInt(req.params.id)}});
-    console.log(snippet);
     res.render('snippets/snippets_form', {title: 'Modifier un snippet', section: 'Snippets', snippet, languages, user});
   }
 
@@ -85,7 +84,7 @@ export class SnippetsController {
       });
 
       if (languagePrisma !== null && userPrisma !== null) {
-        const snippet = await prisma.snippet.update({
+        await prisma.snippet.update({
           where: {id: parseInt(req.params.id)},
           data: {
             title: title,
@@ -103,7 +102,7 @@ export class SnippetsController {
   static async deleteSnippet(req: Request, res: Response): Promise<void> {
     const result = validationResult(req);
     if (result.isEmpty()) {
-      const snippet = await prisma.snippet.delete({where: {id: parseInt(req.params.id)}});
+      await prisma.snippet.delete({where: {id: parseInt(req.params.id)}});
       res.redirect('/');
     }
   }

@@ -1,0 +1,25 @@
+<%- include('../partials/header.ejs', {title: title}) %>
+
+<div class="content">
+    <% if (user !== undefined) {%>
+    <form method="post" action="/admin/users/edit/<%= user.id%>">
+        <%} else {%>
+        <form method="post" action="/admin/users/new">
+            <% }%>
+        <label>
+            <span>Name</span>
+            <input type="text" name="name" value="<%= user !== undefined ? user.name : ''%>">
+        </label>
+            <label>
+                Password
+                <input type="password" name="password" value="<%= user !== undefined ? user.password : ''%>">
+            </label>
+            <label>
+                <span>Is Admin</span>
+                <input type="checkbox" name="role" value="ADMIN">
+            </label>
+            <input type="submit" value="Save">
+    </form>
+</div>
+
+<%- include('../partials/footer.ejs') %>`;

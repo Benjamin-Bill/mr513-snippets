@@ -2,7 +2,7 @@
 
 <div class="content">
     <% if (snippet !== undefined) { %>
-    <form method="post" action="/edit/<%= snippet.id %>">
+    <form method="post" action="/edit<%= snippet.id %>">
         <%} else {%>
         <form method="post" action="/new">
             <% } %>
