@@ -8,6 +8,7 @@ async function main() {
         data: {
             name: 'vass0047',
             hashedPassword: bcrypt.hashSync('azerty', 10),
+            role: 'ADMIN'
         }
     });
 

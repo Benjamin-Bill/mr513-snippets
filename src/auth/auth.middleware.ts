@@ -25,3 +25,14 @@ export async function isAuthoreConnected(req: Request, res: Response, next: Next
     res.redirect('/');
   }
 }
+
+export async function isAdmin(req: Request, res: Response, next: NextFunction): Promise<void> {
+  const user = await prisma.user.findUnique({where: {id: req.session.user.id}}).then((user) => {
+    return user
+  });
+  if (user !== null && user.role === 'ADMIN') {
+    next();
+  } else {
+    res.redirect('/');
+  }
+}

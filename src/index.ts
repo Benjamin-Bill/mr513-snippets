@@ -4,7 +4,8 @@ import session from 'express-session';
 import snippetsRoutes from './snippets/snippets.routes';
 import languagesRoutes from "./languages/languages.routes";
 import authRoutes from "./auth/auth.routes";
-import {sessionUser} from "./auth/auth.middleware";
+import adminRoutes from "./admin/ admin.routes";
+import {isAdmin, sessionUser} from "./auth/auth.middleware";
 
 const app = express();
 const port = process.env.PORT;
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/',sessionUser, snippetsRoutes);
 app.use('/languages', sessionUser, languagesRoutes);
 app.use('/auth', sessionUser, authRoutes);
+app.use('/admin', sessionUser, isAdmin, adminRoutes);
 
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
