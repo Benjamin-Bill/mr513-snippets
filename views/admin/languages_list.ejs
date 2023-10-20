@@ -1,0 +1,19 @@
+<%- include('../partials/header.ejs', {title: title}) %>
+
+<div class="content">
+    <% languages.forEach(language => { %>
+        <div class="card languages">
+            <h4>
+                <i class="<%= language.logo %> colored" ></i>
+                <%= language.name %>
+            </h4>
+            <div class="edition">
+            <a class="button delete" href="/admin/languages/delete/<%= language.id%>">Delete</a>
+            <a class="button edit" href="/admin/languages/edit/<%= language.id%>">Edit</a>
+            </div>
+        </div>
+    <% }) %>
+        <a href="/admin/languages/new" class="float">+</a>
+</div>
+
+<%- include('../partials/footer.ejs') %>

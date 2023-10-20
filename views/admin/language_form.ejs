@@ -1,0 +1,31 @@
+<%- include('../partials/header.ejs', {title: title}) %>
+
+<div class="content">
+    <% if (language !== undefined) {%>
+    <form method="post" action="/admin/languages/edit/<%= language.id %>">
+        <% } else { %>
+        <form method="post" action="/admin/languages/new">
+            <% } %>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name"
+                       value="<% if (language !== undefined) { %><%= language.name %><% } %>"
+                       class="form-control" id="name" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="htmlClass">Html-Class</label>
+                <input type="text" name="code"
+                       value="<% if (language !== undefined) { %><%= language.htmlClass %><% } %>"
+                       class="form-control" id="htmlClass" placeholder="Html-Class">
+            </div>
+            <div class="form-group">
+                <label for="logo">Logo</label>
+                <input type="text" name="logo"
+                       value="<% if (language !== undefined) { %><%= language.logo %><% } %>"
+                       class="form-control" id="logo" placeholder="Logo">
+            </div>
+            <input type="submit"  value="<%= language !== undefined ? 'Save' : 'Create'%>">
+        </form>
+</div>
+
+<%- include('../partials/footer.ejs') %>`;

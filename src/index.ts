@@ -4,7 +4,7 @@ import session from 'express-session';
 import snippetsRoutes from './snippets/snippets.routes';
 import languagesRoutes from "./languages/languages.routes";
 import authRoutes from "./auth/auth.routes";
-import adminRoutes from "./admin/ admin.routes";
+import adminRoutes from "./admin/admin.routes";
 import {isAdmin, isConnected, sessionUser} from "./auth/auth.middleware";
 
 const app = express();
